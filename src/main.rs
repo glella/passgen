@@ -2,13 +2,13 @@
 //!
 //! Generates a random password and copies it to the clipboard
 //!
-//! -l optionally specifies length of password. Defaults to 12.
+//! -l optionally specifies length of password. Defaults to 16.
 //!
-//! -u optionally specifies number of uppercase characters. Defaults to 1.
+//! -u optionally specifies number of uppercase characters. Defaults to 2.
 //!
-//! -d optionally specifies number of digits. Defaults to 1.
+//! -d optionally specifies number of digits. Defaults to 2.
 //! 
-//! -s optionally specifies number of special characters. Defaults to 1.
+//! -s optionally specifies number of special characters. Defaults to 2.
 
 
 extern crate rand;
