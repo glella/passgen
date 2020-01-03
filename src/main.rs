@@ -1,4 +1,4 @@
-//! # passgen
+//! # passclip
 //!
 //! Generates a random password and copies it to the clipboard
 //!
