@@ -31,8 +31,8 @@ const SPECIALSET: &[u8] = b")(*&^%$#@!~";
 
 fn main() {
 
-    let matches = App::new("passgen")
-        .version("1.0")
+    let matches = App::new("passclip")
+        .version("0.1.1")
         .author("Guillermo Lella <arkorott@gmail.com>")
         .about("Password Generator")
         .arg(

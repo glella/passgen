@@ -1,6 +1,6 @@
 [package]
 name = "passclip"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Guillermo Lella <arkorott@gmail.com>"]
 edition = "2018"
 description = "Yet another password generator in Rust. Generates a random password and copies it to the clipboard. (Clipboard access compatible with OSX, Windows and Linux). Optional parameters = length, number of digits, number of uppercase and number of special chars."
