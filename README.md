@@ -1,4 +1,4 @@
-# passgen
+# passclip
 Simple password generator in Rust
 
 Generates a random password and copies it to the clipboard
