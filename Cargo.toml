@@ -6,6 +6,7 @@ edition = "2018"
 description = "Yet another password generator in Rust. Generates a random password and copies it to the clipboard. (Clipboard access compatible with OSX, Windows and Linux). Optional parameters = length, number of digits, number of uppercase and number of special chars."
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/glella/passgen" #name change to passclip to avoid conflicts 
+readme = "README.md"
 
 
 [dependencies]
