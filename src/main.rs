@@ -7,22 +7,21 @@
 //! -u optionally specifies number of uppercase characters. Defaults to 2.
 //!
 //! -d optionally specifies number of digits. Defaults to 2.
-//! 
+//!
 //! -s optionally specifies number of special characters. Defaults to 2.
 
-
-extern crate rand;
 extern crate clipboard;
+extern crate rand;
 extern crate unicode_segmentation;
 
 #[macro_use]
 extern crate clap;
 
-use clipboard::ClipboardProvider;
-use clipboard::ClipboardContext;
-use rand::{Rng, seq::SliceRandom};
-use unicode_segmentation::UnicodeSegmentation;
 use clap::{App, Arg};
+use clipboard::ClipboardContext;
+use clipboard::ClipboardProvider;
+use rand::{seq::SliceRandom, Rng};
+use unicode_segmentation::UnicodeSegmentation;
 
 const LOWERSET: &[u8] = b"abcdefghijklmnopqrstuvwxyz";
 const UPPERSET: &[u8] = b"ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -30,34 +29,33 @@ const DIGITSET: &[u8] = b"0123456789";
 const SPECIALSET: &[u8] = b")(*&^%$#@!~";
 
 fn main() {
-
     let matches = App::new("passclip")
         .version("0.1.1")
         .author("Guillermo Lella <arkorott@gmail.com>")
         .about("Password Generator")
         .arg(
             Arg::with_name("len")
-               .short("l")
-               .value_name("length")
-               .help("Password length, defaults to 16 when omitted")
+                .short("l")
+                .value_name("length")
+                .help("Password length, defaults to 16 when omitted"),
         )
         .arg(
             Arg::with_name("upp")
-               .short("u")
-               .value_name("upper")
-               .help("Uppercase characters, defaults to 2 when omitted")
+                .short("u")
+                .value_name("upper")
+                .help("Uppercase characters, defaults to 2 when omitted"),
         )
         .arg(
             Arg::with_name("dig")
-               .short("d")
-               .value_name("digits")
-               .help("Number of digits, defaults to 2 when omitted")
+                .short("d")
+                .value_name("digits")
+                .help("Number of digits, defaults to 2 when omitted"),
         )
         .arg(
             Arg::with_name("spe")
-               .short("s")
-               .value_name("special")
-               .help("Special characters, defaults to 2 when omitted")
+                .short("s")
+                .value_name("special")
+                .help("Special characters, defaults to 2 when omitted"),
         )
         .get_matches();
 
@@ -67,12 +65,12 @@ fn main() {
     let uppers: usize = value_t!(matches, "upp", usize).unwrap_or(2);
     let lowers: usize;
     if length >= digits + specials + uppers {
-    	lowers = length - digits - specials - uppers;
+        lowers = length - digits - specials - uppers;
     } else {
-    	length = digits + specials + uppers;
-    	lowers = length - digits - specials - uppers;
+        length = digits + specials + uppers;
+        lowers = length - digits - specials - uppers;
     }
-    
+
     let password = gen_passw(lowers, uppers, digits, specials);
 
     println!("{}", password);
@@ -90,18 +88,18 @@ fn gen_chars(len: usize, set: &[u8]) -> String {
             set[index] as char
         })
         .collect();
-        passchars
+    passchars
 }
 
 fn gen_passw(lowernum: usize, uppernum: usize, digitnum: usize, specialnum: usize) -> String {
     let mut s = String::new();
-    
+
     let lowerchars = gen_chars(lowernum, LOWERSET);
     s.push_str(&lowerchars);
 
     let upperchars = gen_chars(uppernum, UPPERSET);
     s.push_str(&upperchars);
-    
+
     let digichars = gen_chars(digitnum, DIGITSET);
     s.push_str(&digichars);
 
@@ -119,7 +117,5 @@ fn shuffle_str(s: &str) -> String {
     let gslice = graphemes.as_mut_slice();
     let mut rng = rand::thread_rng();
     gslice.shuffle(&mut rng);
-    gslice.iter().map(|x| *x).collect::<String>()
+    gslice.iter().copied().collect::<String>()
 }
-
-
